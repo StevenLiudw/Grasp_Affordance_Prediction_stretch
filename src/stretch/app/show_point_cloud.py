@@ -59,12 +59,16 @@ def main(
             head_xyz = servo.get_xyz_in_world_frame().reshape(-1, 3)
             ee_xyz = servo.get_ee_xyz_in_world_frame().reshape(-1, 3)
 
-            xyz = np.concatenate([head_xyz, ee_xyz], axis=0)
-            rgb = (
-                np.concatenate([servo.rgb.reshape(-1, 3), servo.ee_rgb.reshape(-1, 3)], axis=0)
-                / 255
-            )
-            show_point_cloud(xyz, rgb, orig=np.zeros(3))
+            # Modified on Mar 24th by Steven: The point cloud will only contains the head camera.
+            # xyz = np.concatenate([head_xyz, ee_xyz], axis=0)
+            # rgb = (
+            #     np.concatenate([servo.rgb.reshape(-1, 3), servo.ee_rgb.reshape(-1, 3)], axis=0)
+            #     / 255
+            # )
+            # show_point_cloud(xyz, rgb, orig=np.zeros(3))
+            
+            rgb = (servo.rgb.reshape(-1, 3) / 255)  # Normalize RGB values
+            show_point_cloud(head_xyz, rgb, orig=np.zeros(3))
             break
 
         time.sleep(0.01)
