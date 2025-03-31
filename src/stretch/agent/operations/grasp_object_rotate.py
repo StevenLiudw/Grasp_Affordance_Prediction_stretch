@@ -26,7 +26,7 @@ from stretch.utils.gripper import GripperArucoDetector
 from stretch.utils.point_cloud import show_point_cloud
 
 
-class GraspObjectOperation(ManagedOperation):
+class GraspObjectOperationRotation(ManagedOperation):
     """Move the robot to grasp, using the end effector camera, with added base rotation to align with target."""
 
     use_pitch_from_vertical: bool = True
